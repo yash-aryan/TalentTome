@@ -1,0 +1,17 @@
+.nav-bar__list {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 3rem;
+	padding: 0;
+	list-style-type: none;
+}
+
+.nav-bar__item {
+	padding: 1rem;
+}
+.nav-bar__item:hover:active,
+.nav-bar__item.active {
+	background-color: #c0c0cc;
+	border: 2px inset;
+}

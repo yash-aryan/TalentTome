@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './styles/App.css';
+import { useState } from 'react';
+import { pageData } from './data/page-data';
+
+// Imported Components
+import { Header } from './components/Header';
+import { Navbar } from './components/Navbar';
+import { EditContainer } from './components/EditContainer';
+import { PreviewContainer } from './components/PreviewContainer';
+import { GithubLink } from './components/GithubLink';
 
 function App() {
-  const [count, setCount] = useState(0)
+	const appName = 'Talent Tome',
+		headerLevel = 1,
+		initalIndexState = pageData[0].id;
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	const [activeIndex, setActiveIndex] = useState(initalIndexState);
+
+	function handleNavClick(dataId) {
+		setActiveIndex(dataId);
+	}
+
+	return (
+		<>
+			<header className="header">
+				<Header type={headerLevel} text={appName} />
+				<Navbar
+					initalIndex={initalIndexState}
+					pageData={pageData}
+					onClick={handleNavClick}
+				/>
+			</header>
+			<main className="main-content">
+				<EditContainer
+					activeIndex={activeIndex}
+					pageData={pageData}
+					headerLevel={headerLevel + 1}
+				/>
+				<PreviewContainer />
+			</main>
+			<footer className="footer">
+				<GithubLink />
+			</footer>
+		</>
+	);
 }
 
-export default App
+export default App;
