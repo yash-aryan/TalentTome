@@ -27,7 +27,7 @@ function App() {
 				<Navbar
 					initalIndex={initalIndexState}
 					pageData={pageData}
-					onClick={handleNavClick}
+					callbackFn={handleNavClick}
 				/>
 			</header>
 			<main className="main-content">

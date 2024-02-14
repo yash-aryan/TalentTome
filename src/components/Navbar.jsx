@@ -1,13 +1,19 @@
 import { useState } from 'react';
 import '../styles/Navbar.css';
 
-export function Navbar({ initalIndex, pageData, onClick }) {
+/*
+- Self-operating Navbar component that behaves like a radio-button to load one page at a time.
+- Applies 'active' class to the clicked navbar item for styling. 
+- clicked navbar item's id is passed into the callbackFn.
+*/
+
+export function Navbar({ initalIndex, pageData, callbackFn }) {
 	const className = 'nav-bar';
 	const [activeIndex, setActiveIndex] = useState(initalIndex);
 
-	function handleClick(e) {
-		setActiveIndex(+e.target.dataset.id);
-		onClick(+e.target.dataset.id);
+	function handleClickId(itemId) {
+		setActiveIndex(itemId);
+		callbackFn(itemId);
 	}
 
 	return (
@@ -19,7 +25,7 @@ export function Navbar({ initalIndex, pageData, onClick }) {
 							<NavbarItem
 								isActive={activeIndex === item.id}
 								parentClass={className}
-								onClick={handleClick}
+								onClick={handleClickId}
 								dataId={item.id}
 								dataName={item.name}
 							/>
@@ -39,8 +45,7 @@ function NavbarItem({ isActive, parentClass, onClick, dataId, dataName }) {
 		<button
 			type="button"
 			className={className}
-			onClick={onClick}
-			data-id={dataId}
+			onClick={() => onClick(dataId)}
 			aria-label={'Edit ' + dataName}
 		>
 			{dataName}
