@@ -1,27 +1,9 @@
 #root {
-	display: grid;
-	grid-template-columns: auto 1fr;
-	gap: 4rem;
 	padding: 2rem;
 }
 
-.header {
-	grid-column: 1 / 2;
-}
-
 .main-content {
-	grid-column: 2 / 3;
 	display: flex;
-	justify-content: space-between;
-}
-
-.footer {
-	grid-row-start: -2;
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	display: flex;
+	gap: 4rem;
 	justify-content: center;
-	align-items: center;
-	padding: 1rem 0;
 }

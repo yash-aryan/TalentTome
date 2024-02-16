@@ -1,0 +1,16 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.text-field {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	font-size: 1.25rem;
+}
+.text-field > input {
+	padding: 0.5rem;
+	font-size: 1.25rem;
+}
