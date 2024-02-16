@@ -1,0 +1,9 @@
+#root {
+	padding: 2rem;
+}
+
+.main-content {
+	display: flex;
+	gap: 4rem;
+	justify-content: center;
+}
