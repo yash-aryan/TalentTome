@@ -1,4 +1,6 @@
-export function Inputs({ dataList, onChange }) {
+// Component which takes config of inputs & returns a collection of inputs inside a fragment.
+
+export function InputCollection({ dataList, onChange }) {
 	return (
 		<>
 			{dataList.map(data => {

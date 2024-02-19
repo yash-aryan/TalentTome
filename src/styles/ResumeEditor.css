@@ -12,5 +12,25 @@
 }
 .text-field > input {
 	padding: 0.5rem;
-	font-size: 1.25rem;
+	font-size: 1rem;
+}
+
+.form__btn-wrap {
+	display: flex;
+	justify-content: flex-end;
+	gap: 1rem;
+}
+.form__btn {
+	padding: 0.5rem;
+	font-size: 1em;
+	font-weight: 700;
+	border: none;
+	transition: transform 50ms;
+}
+.form__btn:active {
+	transform: translateY(4px);
+}
+.form__btn.--submit {
+	color: white;
+	background: #025e8f;
 }

@@ -1,46 +1,37 @@
 import { BlankLink, Heading, Link, Paragraph } from './Elements';
 
-export function ResumeSection({ sectionList, inputData, formData, sectionClass }) {
+// Component that takes all required config for the particular section & returns section to be used in resume previewing.
+
+export function ResumeSection({ inputData, formData, sectionClass }) {
 	return (
 		<section className={sectionClass + ' resume-section'}>
-			{sectionList.map((data, index) => {
-				const value = formData[inputData[index].name] || inputData[index].placeholder;
+			{inputData.map(data => {
+				const value = formData[data.name] || data.placeholder;
+				const className = 'preview-' + data.name;
+
 				switch (data.type) {
 					case 'heading':
 						return (
 							<Heading
-								key={inputData[index].id}
-								className={data.className}
+								key={data.id}
+								className={className}
 								text={value}
 								level={data.level}
 							/>
 						);
 					case 'paragraph':
-						return (
-							<Paragraph
-								key={inputData[index].id}
-								className={data.className}
-								text={value}
-								id={inputData[index].id}
-							/>
-						);
+						return <Paragraph key={data.id} className={className} text={value} />;
 					case 'link':
 						return (
 							<Link
-								key={inputData[index].id}
-								className={data.className}
+								key={data.id}
+								className={className}
 								hrefPrefix={data.hrefPrefix}
 								link={value}
 							/>
 						);
 					case 'blank':
-						return (
-							<BlankLink
-								key={inputData[index].id}
-								className={data.className}
-								link={value}
-							/>
-						);
+						return <BlankLink key={data.id} className={className} link={value} />;
 					default:
 						return;
 				}

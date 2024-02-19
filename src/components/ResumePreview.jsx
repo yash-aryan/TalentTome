@@ -1,22 +1,33 @@
 import '../styles/ResumePreview.css';
 // import { useState } from 'react';
-import { inputData } from '../data/inputData';
-import { sectionData } from '../data/sectionData';
+import { inputsConfig } from '../data/inputsConfig';
+import { previewConfig } from '../data/previewConfig';
 import { ResumeSection } from './ResumeSection';
 
-// const placeholderData = {};
-// inputData['overview'].forEach(data => (placeholderData[data.name] = data.placeholder));
-
 export function ResumePreview({ formData }) {
-	const section = 'overview';
+	const sectionName = 'overview';
+
 	return (
 		<article className="resume-preview">
 			<ResumeSection
-				sectionList={sectionData[section]}
-				inputData={inputData[section]}
+				inputData={getInputData(sectionName)}
 				formData={formData}
-				sectionClass={section}
+				sectionClass={sectionName}
 			/>
 		</article>
 	);
+}
+
+function getInputData(sectionName) {
+	// Returns a copy of previewConfig of a particular section with added properties from inputsConfig.
+	const inputData = [];
+
+	previewConfig[sectionName].forEach((data, index) => {
+		const dataCopy = { ...data };
+		dataCopy.name = inputsConfig[sectionName][index].name;
+		dataCopy.placeholder = inputsConfig[sectionName][index].placeholder;
+		inputData.push(dataCopy);
+	});
+
+	return inputData;
 }
