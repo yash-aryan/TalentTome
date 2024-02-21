@@ -2,21 +2,23 @@ import { BlankLink, Heading, Link, Paragraph } from './Elements';
 
 // Component that takes all required config for the particular section & returns section to be used in resume previewing.
 
-export function ResumeSection({ inputData, formData, sectionClass }) {
+export function PreviewSection({ inputData, sectionClass }) {
 	return (
-		<section className={sectionClass + ' resume-section'}>
+		<section className={sectionClass + ' preview-section'}>
 			{inputData.map(data => {
-				const value = formData[data.name] || data.placeholder;
+				if (!data.shouldPreview) return;
+
+				const value = data.value;
 				const className = 'preview-' + data.name;
 
-				switch (data.type) {
+				switch (data.previewType) {
 					case 'heading':
 						return (
 							<Heading
 								key={data.id}
 								className={className}
 								text={value}
-								level={data.level}
+								level={data.headingLevel}
 							/>
 						);
 					case 'paragraph':

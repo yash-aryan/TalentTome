@@ -5,7 +5,7 @@
 	padding: 2rem;
 }
 
-.overview.resume-section {
+.overview.preview-section {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;

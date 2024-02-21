@@ -41,3 +41,28 @@ export function BlankLink(props) {
 		</a>
 	);
 }
+
+export function Textarea(props) {
+	return (
+		<textarea
+			name={props.name}
+			className={props.className}
+			cols={props.cols}
+			rows={props.rows}
+			value={props.value}
+			onChange={props.onChange}
+		></textarea>
+	);
+}
+
+export function Input(props) {
+	return (
+		<input
+			type={props.type}
+			name={props.name}
+			value={props.value}
+			placeholder={props.placeholder}
+			onChange={props.onChange}
+		/>
+	);
+}

@@ -11,7 +11,6 @@ export function MainContent() {
 		<main className="main-content">
 			<ResumeEditor
 				liveValues={getLatestData()}
-				sectionName={'overview'}
 				sendEdits={handleSent}
 				cancelEdits={handleCancel}
 				confirmEdits={handleConfirmed}
@@ -26,7 +25,12 @@ export function MainContent() {
 
 	function handleConfirmed(newFormData) {
 		setUnsavedData({});
-		setSavedData({ ...newFormData });
+		setSavedData(prev => {
+			for (let key in newFormData) {
+				prev[key] = newFormData[key];
+			}
+			return prev;
+		});
 	}
 
 	function handleCancel() {
@@ -40,7 +44,6 @@ export function MainContent() {
 		for (let key in unsavedData) {
 			latestData[key] = unsavedData[key];
 		}
-
 		return latestData;
 	}
 }

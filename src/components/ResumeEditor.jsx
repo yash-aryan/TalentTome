@@ -1,10 +1,17 @@
 import '../styles/ResumeEditor.css';
+import { useState } from 'react';
 import { inputsConfig } from '../data/inputsConfig';
 import { InputCollection } from './InputCollection';
+import { Heading } from './Elements';
+import { Navbar } from './Navbar';
 
-export function ResumeEditor({ liveValues, sectionName, sendEdits, cancelEdits, confirmEdits }) {
+export function ResumeEditor({ liveValues, sendEdits, cancelEdits, confirmEdits }) {
+	const [currSection, setCurrSection] = useState('overview');
+
 	return (
 		<div className="resume-editor">
+			<Navbar sendTarget={handleNavClick} />
+			<SectionTitle sectionName={currSection} />
 			<form className="form" onSubmit={handleSubmit} onReset={handleReset}>
 				<InputCollection dataList={getUpdatedSectionData()} onChange={handleChange} />
 				<div className="form__btn-wrap">
@@ -18,6 +25,11 @@ export function ResumeEditor({ liveValues, sectionName, sendEdits, cancelEdits, 
 			</form>
 		</div>
 	);
+
+	function handleNavClick(targetSection) {
+		if (currSection === targetSection) return;
+		setCurrSection(targetSection);
+	}
 
 	function handleChange(e) {
 		const { name, value } = e.target;
@@ -40,9 +52,21 @@ export function ResumeEditor({ liveValues, sectionName, sendEdits, cancelEdits, 
 	function getUpdatedSectionData() {
 		// Returns the form section with added property 'value', containing the latest onChange updates.
 
-		return inputsConfig[sectionName].map(data => {
+		return inputsConfig[currSection].map(data => {
 			data.value = liveValues[data.name] || '';
 			return data;
 		});
 	}
+}
+
+function SectionTitle({ sectionName = '' }) {
+	const prefix = 'Edit ';
+	let title;
+	switch (sectionName) {
+		default:
+			title = sectionName[0].toUpperCase() + sectionName.slice(1);
+			break;
+	}
+
+	return <Heading className="resume-editor__section-title" text={prefix + title} level={2} />;
 }
