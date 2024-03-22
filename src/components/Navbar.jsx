@@ -1,11 +1,11 @@
 import '../styles/Navbar.css';
-import { sectionNames } from '../data/inputsConfig';
+import { tabNames } from '../data/names-src';
 
-export function Navbar({ sendTarget }) {
+export function Navbar({ sendTab }) {
 	return (
 		<nav className="nav-sections-wrap">
 			<ul className="section-list">
-				{sectionNames.map(name => {
+				{tabNames.map(name => {
 					return (
 						<li className="section-list__item" key={name}>
 							<button onClick={handleClick} value={name}>
@@ -19,6 +19,6 @@ export function Navbar({ sendTarget }) {
 	);
 
 	function handleClick(e) {
-		sendTarget(e.target.value);
+		sendTab(e.target.value);
 	}
 }

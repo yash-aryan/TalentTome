@@ -1,8 +1,8 @@
 // Component which takes config of inputs as `dataList` & returns a collection of inputs inside a fragment.
 
-import { Input, Textarea } from './Elements';
+import { Input, Textarea } from './elements';
 
-export function InputCollection({ dataList, onChange }) {
+export function commonCollection({ dataList, onChange }) {
 	return (
 		<>
 			{dataList.map(data => {

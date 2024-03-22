@@ -8,8 +8,8 @@ import { idFactory } from '../utils/idFactory';
 
 const id = idFactory();
 
-export const sectionNames = ['overview', 'experience', 'education'];
-export const inputsConfig = {
+const sectionNames = ['overview', 'experience', 'education'];
+const inputsConfig = {
 	[sectionNames[0]]: getOverview(),
 	[sectionNames[1]]: getExperience(),
 	[sectionNames[2]]: getEducation(),

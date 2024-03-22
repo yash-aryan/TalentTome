@@ -1,30 +1,20 @@
+import { tabNames } from '../data/names-src';
 import '../styles/ResumePreview.css';
-import { inputsConfig } from '../data/inputsConfig';
-import { PreviewSection } from './PreviewSection';
+import { ExpPreview } from './sections/Experience';
 
 export function ResumePreview({ formData }) {
-	const previewSections = ['overview', 'experience', 'education'];
-	const inputData = {};
-
-	previewSections.forEach(sectionName => {
-		inputData[sectionName] = inputsConfig[sectionName].map(data => {
-			data.value = formData[data.name] || data.placeholder;
-			return data;
-		});
-	});
-
 	return (
-		<article className="resume-preview">
-			{previewSections.map(sectionName => {
-				return (
-					<PreviewSection
-						key={sectionName}
-						inputData={inputData[sectionName]}
-						formData={formData}
-						sectionClass={sectionName}
-					/>
-				);
-			})}
-		</article>
+		<section className="resume-preview">
+			{getSections()}
+		</section>
 	);
+
+	function getSections() {
+		for (const tab in formData) {
+			switch (tab) {
+				case tabNames[0]:
+					<ExpPreview key={tabNames[0]} formData={formData} />
+			}
+		}
+	}
 }
