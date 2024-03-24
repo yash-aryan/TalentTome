@@ -4,3 +4,95 @@
 	justify-content: center;
 	padding: 2rem;
 }
+
+.resume-editor {
+	display: flex;
+	gap: 2rem;
+}
+
+.form {
+	width: 20rem;
+	grid-row: 2;
+	grid-column: 2;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+.form__inputs-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	overflow: auto;
+}
+
+.form__add-section {
+	align-self: center;
+	padding: 1rem;
+}
+
+.accordion {
+	position: unset;
+	display: flex;
+	flex-direction: column;
+}
+.accordion.active {
+	gap: 1rem;
+	background-color: #eee;
+	border-radius: 16px;
+}
+.accordion__btn {
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem 0.5rem;
+}
+.accordion__icon {
+	aspect-ratio: 1;
+	width: 24px;
+	transform: rotate(-90deg);
+	background-image: url(/src/assets/chevron-down.svg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+.accordion.active .accordion__icon {
+	transform: unset;
+}
+.accordion__dropdown {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	padding-inline: 1rem;
+	padding-bottom: 2rem;
+}
+
+.input-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	font-size: 1.25rem;
+}
+.input-wrap > input {
+	padding: 0.5rem;
+	font-size: 1rem;
+}
+
+.form__btn-wrap {
+	display: flex;
+	justify-content: flex-end;
+	gap: 1rem;
+}
+.form__btn {
+	padding: 0.5rem;
+	font-size: 1em;
+	font-weight: 700;
+	border: none;
+	transition: transform 50ms;
+}
+.form__btn:active {
+	transform: translateY(4px);
+}
+.form__btn.--submit {
+	color: white;
+	background: #025e8f;
+}

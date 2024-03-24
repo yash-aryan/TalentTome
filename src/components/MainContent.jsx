@@ -1,19 +1,30 @@
 import '../styles/MainContent.css';
 import { useState } from 'react';
 import { tabNames } from '../data/names-src';
-import { ResumeEditor } from './ResumeEditor';
-import { ResumePreview } from './ResumePreview';
+import { ResumeDisplay } from './ResumeDisplay';
 import { Navbar } from './Navbar';
+import { EducationInputs } from './sections/Education';
+import { ExperienceInputs } from './sections/Experience';
+import { OverviewInputs } from './sections/Overview';
 
 export function MainContent() {
 	const [currTab, setCurrTab] = useState(tabNames[1]);
-	const [formData, setFormData] = useState({ all: [], saved: [] });
+	const [formData, setFormData] = useState({});
+
+	const formProps = {
+		tabData: formData[currTab],
+		sendSubmit: handleSubmit,
+	};
 
 	return (
 		<main className="main-content">
-			<Navbar sendTab={handleNavClick} />
-			<ResumeEditor tab={currTab} formData={mergeFormData()} sendEdits={handleChange} />
-			<ResumePreview tab={currTab} formData={mergeFormData()} />
+			<section className='resume-editor'>
+				<Navbar sendTab={handleNavClick} />
+				{getFormComponent(currTab, formProps)}
+			</section>
+			<section>
+				<ResumeDisplay currTab={currTab} formData={formData} />
+			</section>
 		</main>
 	);
 
@@ -22,39 +33,18 @@ export function MainContent() {
 		setCurrTab(newTab);
 	}
 
-	function mergeFormData() {
-		const merged = { ...formData.saved };
-		for (let [name, value] of Object.entries(formData.unsaved)) {
-			merged[name] = value;
-		}
-		return merged;
+	function handleSubmit(data) {
+		setFormData({ ...formData, [currTab]: data });
 	}
+}
 
-	function handleChange(newData) {
-		// Updates the state with new data.
-		const targetIndex = formData.unsaved.findIndex(data => {
-			return data.tab === currTab && data.section === newData.section;
-		});
-
-		if (targetIndex === -1) return setFormData({ ...formData, unsaved: [newData] });
-
-		setFormData({
-			...formData,
-			unsaved: formData.unsaved.map((data, index) => {
-				if (index === targetIndex) data.value = newData.value;
-				return data;
-			}),
-		});
-	}
-
-	function deleteTabSection(index) {
-		// Remove formData of particular section & re-assign section index.
-		const newTabData = formData
-			.filter(data => data.tab === currTab)
-			.filter(data => data.section !== index);
-
-		const nonTabData = formData.filter(data => data.tab !== currTab);
-
-		setFormData([...nonTabData, ...newTabData]);
+function getFormComponent(tab, props) {
+	switch (tab) {
+		case tabNames[0]:
+			return <OverviewInputs {...props} />;
+		case tabNames[1]:
+			return <ExperienceInputs {...props} />;
+		case tabNames[2]:
+			return <EducationInputs {...props} />;
 	}
 }

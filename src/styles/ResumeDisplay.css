@@ -1,11 +1,13 @@
-.resume-preview {
+.resume-display {
 	aspect-ratio: 1/ 1.414;
-	width: 40rem;
+	width: min(35vw, 40rem);
 	background: #eee;
 	padding: 2rem;
 }
 
-.overview.preview-section {
+.display-section {}
+
+.display-section--overview {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
