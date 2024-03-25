@@ -5,6 +5,7 @@ export function TextField(props) {
 		placeholder: props.placeholder,
 		value: props.value,
 		onChange: props.onChange,
+		autoComplete: 'off',
 	};
 
 	return (

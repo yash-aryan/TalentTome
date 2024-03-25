@@ -3,5 +3,5 @@ export function getFormData(formElem) {
 	for (let [name, value] of new FormData(formElem)) {
 		formData[name] = value;
 	}
-    return formData;
+	return formData;
 }

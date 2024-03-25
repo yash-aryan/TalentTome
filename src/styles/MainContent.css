@@ -27,8 +27,8 @@
 }
 
 .form__add-section {
-	align-self: center;
-	padding: 1rem;
+	align-self: flex-start;
+	padding: 0.5rem;
 }
 
 .accordion {

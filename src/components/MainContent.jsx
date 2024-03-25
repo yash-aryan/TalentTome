@@ -13,12 +13,13 @@ export function MainContent() {
 
 	const formProps = {
 		tabData: formData[currTab],
+		sendChange: handleChange,
 		sendSubmit: handleSubmit,
 	};
 
 	return (
 		<main className="main-content">
-			<section className='resume-editor'>
+			<section className="resume-editor">
 				<Navbar sendTab={handleNavClick} />
 				{getFormComponent(currTab, formProps)}
 			</section>
@@ -31,6 +32,25 @@ export function MainContent() {
 	function handleNavClick(newTab) {
 		if (currTab === newTab) return;
 		setCurrTab(newTab);
+	}
+
+	function handleChange(name, value, sectionId = null) {
+		const currTabData = formData[currTab];
+		if (sectionId === null) {
+			const newTabData = { ...currTabData, [name]: value };
+			return setFormData({ ...formData, [currTab]: newTabData });
+		}
+
+		if (Array.isArray(currTabData) && currTabData.length !== 0) {
+			const newTabData = currTabData.map((data, index) => {
+				if (index === sectionId) data[name] = value;
+				return data;
+			});
+			return setFormData({ ...formData, [currTab]: newTabData });
+		}
+
+		const newTabData = [{ [name]: value }];
+		return setFormData({ ...formData, [currTab]: newTabData });
 	}
 
 	function handleSubmit(data) {
