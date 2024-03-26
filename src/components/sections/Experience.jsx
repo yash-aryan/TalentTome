@@ -1,6 +1,6 @@
 import { inputNames, tabNames } from '../../data/names-src';
-import { FormButtons, TextField } from '../form-elems';
 import { getFormData } from '../../utils/form-data';
+import { FormButtons, TextField } from '../form-elems';
 
 const identifier = tabNames[1];
 const names = inputNames[identifier];
@@ -114,14 +114,14 @@ export function ExperienceDisp({ formData }) {
 
 	return (
 		<section className="display-section display-section--experience">
-			<h2>Work Experience</h2>
+			<h2 className="display-section__title">Work Experience</h2>
 			{formData.map((data, index) => {
 				return (
-					<section key={index}>
-						<div>
+					<section className="entry" key={index}>
+						<div className="entry__row-wrap">
 							{data[names[0]] && <h3>{data[names[0]]}</h3>}
 							{data[names[3]] && data[names[4]] && (
-								<strong>{data[names[3]].concat(' - ', data[names[4]])}</strong>
+								<strong className="entry__date">{data[names[3]].concat(' - ', data[names[4]])}</strong>
 							)}
 						</div>
 						{data[names[1]] && <em>{data[names[1]]}</em>}
