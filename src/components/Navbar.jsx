@@ -3,12 +3,12 @@ import { tabNames } from '../data/names-src';
 
 export function Navbar({ sendTab }) {
 	return (
-		<nav className="nav-sections-wrap">
-			<ul className="section-list">
+		<nav className='nav-sections-wrap'>
+			<ul className='section-list'>
 				{tabNames.map(name => {
 					return (
-						<li className="section-list__item" key={name}>
-							<button onClick={handleClick} value={name}>
+						<li className='section-list__item' key={name}>
+							<button type='button' onClick={handleClick} value={name}>
 								{name}
 							</button>
 						</li>
